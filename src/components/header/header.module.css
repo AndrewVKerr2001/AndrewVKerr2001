@@ -1,8 +1,12 @@
 
 .header {
     @apply w-full h-fit px-6 py-4;
-    @apply bg-slate-400 text-slate-50;
-    @apply border-b-2 border-slate-300;
-    @apply shadow-lg shadow-slate-300;
+    @apply bg-purple-800 text-slate-100;
+    @apply shadow-md shadow-purple-600;
+    @apply flex flex-row flex-nowrap gap-2;
+}
+
+.navbar {
+    @apply w-fit h-fit;
     @apply flex flex-row flex-nowrap gap-2;
 }

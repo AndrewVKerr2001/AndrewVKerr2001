@@ -3,8 +3,8 @@ import { readFileSync } from "node:fs";
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
-    setEnv(mode);
+export default defineConfig(({ command, mode }) => {
+    setEnv(command, mode);
     return {
         plugins: [
             react(),
@@ -18,10 +18,12 @@ export default defineConfig(({ mode }) => {
         ],
     };
 });
-function setEnv(mode) {
+function setEnv(command, mode) {
     Object.assign(process.env, loadEnv(mode, ".", ["REACT_APP_", "NODE_ENV", "PUBLIC_URL"]));
     process.env.NODE_ENV ||= mode;
-    const { homepage } = JSON.parse(readFileSync("package.json", "utf-8"));
+    let { homepage } = JSON.parse(readFileSync("package.json", "utf-8"));
+    if(command == "build")
+        homepage = "//andrewvkerr2001.github.io/AndrewVKerr2001/";
     process.env.PUBLIC_URL ||= homepage
         ? `${homepage.startsWith("http") || homepage.startsWith("/")
             ? homepage
